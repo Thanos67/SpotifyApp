@@ -1,1 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+/* Application-wide Styles */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css");
+ 
+h1 {
+    color: #369;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250%;
+  }
+  h2, h3 ,h4 ,h5{
+    color: rgb(80, 117, 155);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    margin-top: 1.5rem;
+  }
+  body {
+    margin: 2em;
+    background-color: rgb(31, 31, 31);
+  }
+  body, input[type="text"], button {
+    color: #333;
+    font-family: Cambria, Georgia, serif;
+  }
+  button {
+    background-color: rgb(238, 238, 238);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: black;
+    font-size: 1.2rem;
+    padding: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  button:hover {
+    background-color: black;
+    color: white;
+  }
+  button:disabled {
+    background-color: #eee;
+    color: #aaa;
+    cursor: auto;
+  }
+  
+  /* everywhere else */
+  * {
+    font-family: Arial, Helvetica, sans-serif;
+  }

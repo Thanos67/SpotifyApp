@@ -1,0 +1,45 @@
+#playlists{
+    border-radius: 2%;
+    padding: 20px;
+    margin: 20px;
+    height: 20rem;
+    
+} 
+
+img{
+    border-radius: 5%;
+    width: 200px;
+    height: 200px;
+}
+.container-fluid{
+   
+    padding: 40px;
+    margin: 20px;
+}
+button{
+    margin: 50px;
+    margin-bottom: 100px;
+    background-color: rgb(51, 153, 131);
+    margin-right: 50%;
+}
+h1{
+    text-align: center;
+    color: #369;
+    font-size: 350%;
+}
+h5{
+    text-align: center;
+    color: rgb(142, 170, 197);
+    
+}
+#user_image{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+.bi{
+    
+    padding: 15px;
+  }
