@@ -1,0 +1,43 @@
+img{
+    border-radius: 5%;
+    width: 400px;
+    height: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+}
+
+h1{
+    text-align: center;
+    color: #369;
+    font-size: 350%;
+}
+h2{
+    text-align: center;
+    color: #369;
+    font-size: 250%;
+    padding: 50px;
+
+}
+h5,h3{
+    text-align: center;
+    color: rgb(142, 170, 197);
+    
+}
+#track{
+    border-radius: 2%;
+    padding: 20px;
+    margin: 20px;
+    height: 20rem;
+    justify-content: center;
+    margin-bottom: 100px;
+} 
+#track-features{
+    border-radius: 2%;
+    padding: 20px;
+    margin: 20px;
+    height: 20rem;
+    justify-content: center;
+    margin-bottom: 300px;
+} 

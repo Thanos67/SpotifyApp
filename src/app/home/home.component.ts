@@ -5,18 +5,22 @@ import { map } from 'rxjs/operators';
 import { playlists } from '../playlists';
 
 @Component({
-  selector: 'tracks',
-  templateUrl: './tracks.component.html',
-  styleUrls: ['./tracks.component.css']
+  selector: 'home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class TracksComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   public playlists :any[]=[] ;
+  public savedTracks :any[]=[] ;
   public monthlyTopArtists :any[]=[] ;
   public topArtists :any[]=[] ;
   public user;
   public logedIn=false
-  items = [1, 2, 3 ,4];
+  public playlistsClicked:boolean=false;
+  public savedTracksClicked:boolean=false;
+  public totalSavedTracks
+
   
   
 
@@ -67,6 +71,8 @@ export class TracksComponent implements OnInit {
     this.playlists = data['items']
     console.log(typeof data)
     console.log(this.playlists)
+    this.playlistsClicked=true
+    this.savedTracksClicked=false
 
     })
   }
@@ -79,6 +85,23 @@ export class TracksComponent implements OnInit {
     console.log(this.playlists)
 
     })
+  }
+
+  getSavedTracks(){
+    this.service.getSavedTracks()
+    .subscribe(data=>{
+    this.savedTracks = data['items']
+    this.totalSavedTracks=data['total']
+    console.log(typeof data)
+    console.log('number of saved tracks' +this.totalSavedTracks)
+    console.log(' saved tracks' +this.savedTracks)
+
+
+  
+    this.savedTracksClicked=true
+    this.playlistsClicked=false
+    })
+    
   }
 
 }

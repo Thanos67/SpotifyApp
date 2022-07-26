@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row">
+    <div  class="col-5">
+      <div *ngIf="!logedIn">
+        <button onclick="location.href='/login'" type="button">
+            Login to Spotify
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="logedIn">
+    <h1>Welcome  {{user.display_name}}<i class="bi bi-music-note"></i></h1> 
+  <div > 
+  <img src="{{user.images[0].url}}" alt="" id="user_image"> 
+  </div>
+  <h5>{{user.followers.total}} Followers<i class="bi bi-person"></i></h5>
+
+  <h3>Your top artist ever is : "{{topArtists[0].name}}"</h3>
+  <h3>Your top artist for this month is : "{{monthlyTopArtists[0].name}}"</h3>
+  
+
+<div class="row">
+  <div class="col">
+    <button (click)="getPlaylists()"><span class="bi-search"></span>  Get your Playlists</button>
+  </div>
+  <div class="col">
+    <button (click)="getSavedTracks()"><span class="bi-search"></span>  Get your favorite tracks</button>
+  </div>
+</div>
+
+
+<div *ngIf="playlists &&  playlistsClicked">
+  <div class="row">
+  <div class="col-xl-2 col-lg-3 col-md-6" *ngFor="let p of playlists">
+    <div  id="playlists">
+        <img src="{{p.images[0].url}}" alt=""> 
+        <h3>  {{ p.name }}  </h3>
+    </div>
+  
+  </div> 
+</div> 
+</div>
+
+
+
+<div *ngIf="savedTracks && savedTracksClicked" >
+  <div class="row">
+  <div class="col-xl-2 col-lg-3 col-md-6" *ngFor="let t of savedTracks">
+    <div  id="playlists">
+      <a [routerLink]="['/track-info', t.track.id ]" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <img src="{{t.track.album.images[0].url}}" alt=""></a> 
+        <h3>  {{ t.track.name }} </h3>
+    </div>
+  
+  </div> 
+</div> 
+</div>
+</div>

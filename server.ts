@@ -1,3 +1,4 @@
+
 const express = require('express');
 const http = require('http');
 const path = require('path');
@@ -11,6 +12,7 @@ const app = express();
 const port = 3001;
 
 app.use(express.static(__dirname + '/dist/spotify-app'));
+
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
@@ -83,7 +85,7 @@ app.get('/credentials', function(req, res) {
 app.get('/api/playlists', function(req, res) {
   
  var options = {
-        url: 'https://api.spotify.com/v1/me/playlists',
+        url: 'https://api.spotify.com/v1/me/playlists?limit=49&offset=0',
        headers: {
           'Authorization': 'Bearer ' + token,
         },
@@ -97,10 +99,10 @@ app.get('/api/playlists', function(req, res) {
      
 });
 
-app.get('/api/me/tracks', function(req, res) {
-  
+app.get('/api/me/top/tracks', function(req, res) {
+  var offset= req.query.offset || 0;
  var options = {
-        url: 'https://api.spotify.com/v1/me/tracks',
+        url: 'https://api.spotify.com/v1/me/tracks?limit=50&offset='+offset,
        headers: {
           'Authorization': 'Bearer ' + token,
         },
@@ -150,6 +152,41 @@ app.get('/api/me/top/artists', function(req, res) {
         });
       
  });
+
+ app.get('/api/audio-features', function(req, res) {
+  var id= req.query.trackId;
+  var options = {
+         url: 'https://api.spotify.com/v1/audio-features/'+id,
+        headers: {
+           'Authorization': 'Bearer ' + token,
+         },
+         responseType:'json',
+          json: true
+        };
+        request.get(options, function(error, response, body) {
+          console.log(body);
+          res.send(body)
+        });
+      
+ });
+
+ app.get('/api/track', function(req, res) {
+  var id= req.query.trackId;
+  var options = {
+         url: 'https://api.spotify.com/v1/tracks/'+id,
+        headers: {
+           'Authorization': 'Bearer ' + token,
+         },
+         responseType:'json',
+          json: true
+        };
+        request.get(options, function(error, response, body) {
+          console.log(body);
+          res.send(body)
+        });
+      
+ });
+
 
 
 
