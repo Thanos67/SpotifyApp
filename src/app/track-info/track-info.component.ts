@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
@@ -12,6 +13,7 @@ export class TrackInfoComponent  implements OnInit  {
   trackId: any;
   trackFeatures: any=[]
   track:any=[]
+  key: string='';
 
   constructor(
     private service : spotifyService,
@@ -19,6 +21,24 @@ export class TrackInfoComponent  implements OnInit  {
     private route: ActivatedRoute
   ) {}
 
+
+    keyMap = new Map<number, string>([
+    [0, "C"],
+    [1, "C#"],
+    [2, "D"],
+    [3, "D#"],
+    [4, "E"],
+    [5, "F"],
+    [6, "F#"],
+    [7, "G"],
+    [8, "G#"],
+    [9, "A"],
+    [10, "Α#"],
+    [11, "Β"],
+    
+  ]);
+
+  
   ngOnInit() {
 
     console.log(this.route.snapshot.url); // array of states
@@ -41,6 +61,7 @@ export class TrackInfoComponent  implements OnInit  {
       
   
       })
+      this.trackFeatures.key=this.keyMap.get(this.trackFeatures.key)
   }
 
 }
