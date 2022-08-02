@@ -19,7 +19,6 @@
   <h3>Your top artist ever is : "{{topArtists[0].name}}"</h3>
   <h3>Your top artist for this month is : "{{monthlyTopArtists[0].name}}"</h3>
   
-
 <div class="row">
   <div class="col">
     <button (click)="getPlaylists()"><span class="bi-search"></span>  Get your Playlists</button>
@@ -28,7 +27,6 @@
     <button (click)="getSavedTracks()"><span class="bi-search"></span>  Get your favorite tracks</button>
   </div>
 </div>
-
 
 <div *ngIf="playlists &&  playlistsClicked">
   <div class="row">
@@ -41,8 +39,6 @@
   </div> 
 </div> 
 </div>
-
-
 
 <div *ngIf="savedTracks && savedTracksClicked" >
   <div class="row">

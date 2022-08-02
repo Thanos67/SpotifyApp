@@ -20,8 +20,7 @@ export class TrackInfoComponent  implements OnInit  {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
-
+  
     keyMap = new Map<number, string>([
     [0, "C"],
     [1, "C#"],
@@ -35,33 +34,19 @@ export class TrackInfoComponent  implements OnInit  {
     [9, "A"],
     [10, "Α#"],
     [11, "Β"],
-    
   ]);
 
-  
   ngOnInit() {
-
-    console.log(this.route.snapshot.url); // array of states
     this.trackId=this.route.snapshot.url[1].path
-        console.log(this.route.snapshot.url[1].path); 
 
     this.service.getTrackFeatures(this.trackId)
       .subscribe(data=>{
       this.trackFeatures = data
-      console.log(typeof data)
-      console.log(this.trackFeatures)
-      
-  
+      this.trackFeatures['key']=this.keyMap.get(this.trackFeatures['key'])
       })
       this.service.getTrack(this.trackId)
       .subscribe(data=>{
       this.track = data
-      console.log(typeof data)
-      console.log(this.trackFeatures)
-      
-  
       })
-      this.trackFeatures.key=this.keyMap.get(this.trackFeatures.key)
   }
-
 }

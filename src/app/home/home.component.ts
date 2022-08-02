@@ -21,9 +21,6 @@ export class HomeComponent implements OnInit {
   public savedTracksClicked:boolean=false;
   public totalSavedTracks
 
-  
-  
-
   constructor(private service : spotifyService) { 
    
   }
@@ -33,47 +30,33 @@ export class HomeComponent implements OnInit {
      this.service.getProfile()
       .subscribe(data=>{
       this.user = data
-      console.log('this. user', this.user)
       if('error' in this.user) {
-        console.log('in catch error ',this.user.error)
         this.logedIn=false
         console.log(this.logedIn)
        }else{
       this.logedIn=true
-      console.log('in catch error ',this.user)
-      console.log(this.logedIn)
-      
       }
       })
+
 //fetch top artists 
       this.service.getTopArtists('long_term')
       .subscribe(data=>{
       this.topArtists = data['items']
-      console.log(typeof data)
-      console.log(this.playlists)
-  
       })
+
 //fetch top artists for last month
       this.service.getTopArtists('medium_term')
       .subscribe(data=>{
       this.monthlyTopArtists = data['items']
-      console.log(typeof data)
-      console.log(this.playlists)
-  
       })
 
   }
-
-
   getPlaylists(){
     this.service.getPlaylists()
     .subscribe(data=>{
     this.playlists = data['items']
-    console.log(typeof data)
-    console.log(this.playlists)
     this.playlistsClicked=true
     this.savedTracksClicked=false
-
     })
   }
 
@@ -81,9 +64,6 @@ export class HomeComponent implements OnInit {
     this.service.getTopArtists('long_term')
     .subscribe(data=>{
     this.topArtists = data['items']
-    console.log(typeof data)
-    console.log(this.playlists)
-
     })
   }
 
@@ -92,17 +72,10 @@ export class HomeComponent implements OnInit {
     .subscribe(data=>{
     this.savedTracks = data['items']
     this.totalSavedTracks=data['total']
-    console.log(typeof data)
-    console.log('number of saved tracks' +this.totalSavedTracks)
-    console.log(' saved tracks' +this.savedTracks)
-
-
   
     this.savedTracksClicked=true
     this.playlistsClicked=false
     })
-    
+  
   }
-
 }
-
