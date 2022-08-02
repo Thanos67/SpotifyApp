@@ -24,7 +24,7 @@ server.listen(port, () => console.log(`App running on: http://localhost:${port}`
 //spotify login
 
 var client_id = '24ec2440c94e42a0b4e83860d6aa39be';
-var redirect_uri = 'http://localhost:3001/credentials/';
+var redirect_uri = 'https://spotify-statistics-app.herokuapp.com//credentials/';
 var client_secret ='55fa096f06a34e41ab47555ce76f1402';
 let token =''
 
@@ -75,7 +75,7 @@ app.get('/credentials', function(req, res) {
    token = body.access_token;
    console.log('form server token' +token)
     //return res.status(200).json(body);
-    res.redirect('http://localhost:3001/')
+    res.redirect('https://spotify-statistics-app.herokuapp.com/')
     console.log(body)
     
   });
