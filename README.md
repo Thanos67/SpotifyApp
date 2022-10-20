@@ -3,6 +3,7 @@
 This is a simple Angular / Node JS app.
 
 In this App I consume the Spotify Web Api to extract profile information and statistics of Spotify users.
+Since I use this api in dev mode, in order for someone to login I have to manually add this new user via the Spotify dev console.
 
 Url of the project : https://spotify-statistics-app.herokuapp.com/
 
