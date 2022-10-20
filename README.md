@@ -4,6 +4,7 @@ This is a simple Angular / Node JS app.
 
 In this App I consume the Spotify Web Api to extract profile information and statistics of Spotify users.
 
+Url of the project : https://spotify-statistics-app.herokuapp.com/
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
 
