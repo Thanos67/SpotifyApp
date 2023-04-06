@@ -42,7 +42,7 @@ export class spotifyService {
   }
   getTrackFeatures(id) : Observable<any> {
     let url='http://localhost:3001/api/audio-features?trackId=' + id
-    let heroku_url='https://spotify-statistics-app.herokuapp.com/audio-features?trackId=' + id
+    let heroku_url='https://spotify-statistics-app.herokuapp.com/api/audio-features?trackId=' + id
     return this.http.get<any>(heroku_url)
 
   }
