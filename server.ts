@@ -18,7 +18,7 @@ const server = http.createServer(app);
 server.listen(port, () => console.log(`App running on: http://localhost:${port}`));
 //spotify login
 var client_id = 'e4960cc586854b839fbad87ba0b30c3d';
-var redirect_uri = 'https://aggressive-dog-garment.cyclic.app/credentials/';
+var redirect_uri = 'https://spotify-statistics-app.herokuapp.com/credentials/';
 var client_secret ='6d73641fa6514f5bbe49bb9d6b7bb399';
 let token =''
 
@@ -57,7 +57,7 @@ app.get('/credentials', function(req, res) {
 
   request.post(authOptions, function(error, response, body) {
    token = body.access_token;
-    res.redirect('https://aggressive-dog-garment.cyclic.app/')
+    res.redirect('https://spotify-statistics-app.herokuapp.com/')
 
   });
 
