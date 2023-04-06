@@ -57,8 +57,8 @@ app.get('/credentials', function(req, res) {
 
   request.post(authOptions, function(error, response, body) {
    token = body.access_token;
-    //return res.status(200).json(body);
     res.redirect('https://aggressive-dog-garment.cyclic.app/')
+
   });
 
 });
