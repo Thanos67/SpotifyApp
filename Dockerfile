@@ -1,21 +1,19 @@
-# Specify a base image
-FROM node:14
+FROM node:16 AS ui-build
+WORKDIR /usr/src/app
+COPY . .
+RUN npm install @angular/cli && npm install && npm run build
 
-# Set the working directory
-WORKDIR /app
 
-# Copy the package files and install dependencies
+FROM node:16 AS server-build
+WORKDIR /root/
+COPY --from=ui-build /usr/src/app/dist ./dist
 COPY package*.json ./
 RUN npm install
+COPY server.ts .
 
-# Copy the rest of the app
-COPY . .
 
-# Set environment variables
-ENV PORT=8080
+EXPOSE 3001
+CMD [ "node", "server.ts" ]
 
-# Expose the port
-EXPOSE $PORT
-EXPOSE 4200
-# Start the app
-CMD [ "npm", "start" ]
+
+

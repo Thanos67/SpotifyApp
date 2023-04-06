@@ -17,16 +17,16 @@ const server = http.createServer(app);
 
 server.listen(port, () => console.log(`App running on: http://localhost:${port}`));
 //spotify login
-var client_id = '24ec2440c94e42a0b4e83860d6aa39be';
-var redirect_uri = 'https://spotify-statistics-app.herokuapp.com/credentials/';
-var client_secret ='55fa096f06a34e41ab47555ce76f1402';
+var client_id = 'e4960cc586854b839fbad87ba0b30c3d';
+var redirect_uri = 'https://aggressive-dog-garment.cyclic.app/credentials/';
+var client_secret ='6d73641fa6514f5bbe49bb9d6b7bb399';
 let token =''
 
 app.get('/login', function(req, res) {
 
   var state = generateRandomString(16);
   var scope = 'playlist-modify-private playlist-read-private user-library-read user-follow-read user-library-modify playlist-modify-public user-top-read playlist-read-collaborative user-read-private user-read-email user-modify-playback-state user-follow-modify user-read-recently-played';
-  
+
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -39,7 +39,7 @@ app.get('/login', function(req, res) {
 // your application requests authorization
 app.get('/credentials', function(req, res) {
   var code = req.query.code || null;
-  
+
   var state = req.query.state || null;
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
@@ -58,13 +58,13 @@ app.get('/credentials', function(req, res) {
   request.post(authOptions, function(error, response, body) {
    token = body.access_token;
     //return res.status(200).json(body);
-    res.redirect('https://spotify-statistics-app.herokuapp.com/')
+    res.redirect('https://aggressive-dog-garment.cyclic.app/')
   });
-  
+
 });
 
 app.get('/api/playlists', function(req, res) {
-  
+
  var options = {
         url: 'https://api.spotify.com/v1/me/playlists?limit=49&offset=0',
        headers: {
@@ -76,7 +76,7 @@ app.get('/api/playlists', function(req, res) {
        request.get(options, function(error, response, body) {
          res.json(body)
        });
-     
+
 });
 
 app.get('/api/me/top/tracks', function(req, res) {
@@ -92,7 +92,7 @@ app.get('/api/me/top/tracks', function(req, res) {
        request.get(options, function(error, response, body) {
          res.send(body)
        });
-     
+
 });
 
 app.get('/api/me', function(req, res) {
@@ -108,7 +108,7 @@ app.get('/api/me', function(req, res) {
          console.log(body);
          res.send(body)
        });
-     
+
 });
 app.get('/api/me/top/artists', function(req, res) {
   var time_range= req.query.time_range;
@@ -123,7 +123,7 @@ app.get('/api/me/top/artists', function(req, res) {
         request.get(options, function(error, response, body) {
           res.send(body)
         });
-      
+
  });
  app.get('/api/audio-features', function(req, res) {
   var id= req.query.trackId;
@@ -138,7 +138,7 @@ app.get('/api/me/top/artists', function(req, res) {
         request.get(options, function(error, response, body) {
           res.send(body)
         });
-      
+
  });
 
  app.get('/api/track', function(req, res) {
@@ -154,9 +154,9 @@ app.get('/api/me/top/artists', function(req, res) {
         request.get(options, function(error, response, body) {
           res.send(body)
         });
-      
+
  });
- 
+
   const generateRandomString = (myLength) => {
     const chars =
       "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
@@ -164,7 +164,7 @@ app.get('/api/me/top/artists', function(req, res) {
       { length: myLength },
       (v, k) => chars[Math.floor(Math.random() * chars.length)]
     );
-  
+
     const randomString = randomArray.join("");
     return randomString;
   };
