@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
       })
 
 //fetch top artists for last month
-      this.service.getTopArtists('short_term')
+      this.service.getTopArtists('medium_term')
       .subscribe(data=>{
       this.monthlyTopArtists = data['items']
       })
