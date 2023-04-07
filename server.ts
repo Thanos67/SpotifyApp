@@ -1,4 +1,3 @@
-
 const express = require('express');
 const session = require('express-session');
 const http = require('http');
@@ -22,7 +21,7 @@ var client_id = 'e4960cc586854b839fbad87ba0b30c3d';
 var redirect_uri = 'https://spotify-statistics-app.herokuapp.com/credentials/';
 var client_secret ='6d73641fa6514f5bbe49bb9d6b7bb399';
 
-
+app.set('trust proxy', 1)
 app.use(session({
   secret: 'asdasfdfs32asdfdffsn', // Replace with your own secret key
   resave: false,
