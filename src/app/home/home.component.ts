@@ -19,14 +19,12 @@ export class HomeComponent implements OnInit {
   public logedIn=false
   public playlistsClicked:boolean=false;
   public savedTracksClicked:boolean=false;
-  public totalSavedTracks
+  public totalSavedTracks;
 
   constructor(private service : spotifyService) { 
    
   }
-
   ngOnInit(): void {
-    
      this.service.getProfile()
       .subscribe(data=>{
       this.user = data
@@ -45,7 +43,7 @@ export class HomeComponent implements OnInit {
       })
 
 //fetch top artists for last month
-      this.service.getTopArtists('medium_term')
+      this.service.getTopArtists('short_term')
       .subscribe(data=>{
       this.monthlyTopArtists = data['items']
       })

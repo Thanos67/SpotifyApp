@@ -1,5 +1,6 @@
 
 const express = require('express');
+const session = require('express-session');
 const http = require('http');
 const path = require('path');
 const querystring = require("querystring");
@@ -20,7 +21,17 @@ server.listen(port, () => console.log(`App running on: http://localhost:${port}`
 var client_id = 'e4960cc586854b839fbad87ba0b30c3d';
 var redirect_uri = 'https://spotify-statistics-app.herokuapp.com/credentials/';
 var client_secret ='6d73641fa6514f5bbe49bb9d6b7bb399';
-let token =''
+
+
+app.use(session({
+  secret: 'asdasfdfs32asdfdffsn', // Replace with your own secret key
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: true, // Set to true if using HTTPS
+    maxAge: 3600000 // Set the session cookie expiration time in milliseconds
+  }
+}));
 
 app.get('/login', function(req, res) {
 
@@ -36,10 +47,22 @@ app.get('/login', function(req, res) {
       scope: scope,
     }));
 });
+
+app.get('/api/logout', function(req, res) {
+  // Destroy the session
+  req.session.destroy(function(err) {
+    if (err) {
+      console.error('Error destroying session:', err);
+    } else {
+      // Redirect to the logout page or perform any other logout logic
+      res.redirect('https://spotify-statistics-app.herokuapp.com');
+    }
+  });
+});
+
 // your application requests authorization
 app.get('/credentials', function(req, res) {
   var code = req.query.code || null;
-
   var state = req.query.state || null;
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
@@ -56,16 +79,17 @@ app.get('/credentials', function(req, res) {
   };
 
   request.post(authOptions, function(error, response, body) {
-   token = body.access_token;
-    res.redirect('https://spotify-statistics-app.herokuapp.com/')
+    req.session.token = body.access_token;
+    console.log( req.session.token);
+    res.redirect('https://spotify-statistics-app.herokuapp.com')
 
   });
 
 });
 
 app.get('/api/playlists', function(req, res) {
-
- var options = {
+  var token = req.session.token;
+  var options = {
         url: 'https://api.spotify.com/v1/me/playlists?limit=49&offset=0',
        headers: {
           'Authorization': 'Bearer ' + token,
@@ -80,6 +104,7 @@ app.get('/api/playlists', function(req, res) {
 });
 
 app.get('/api/me/top/tracks', function(req, res) {
+  var token = req.session.token;
   var offset= req.query.offset || 0;
  var options = {
         url: 'https://api.spotify.com/v1/me/tracks?limit=50&offset='+offset,
@@ -96,6 +121,8 @@ app.get('/api/me/top/tracks', function(req, res) {
 });
 
 app.get('/api/me', function(req, res) {
+  var token = req.session.token;
+  
  var options = {
         url: 'https://api.spotify.com/v1/me/',
        headers: {
@@ -105,12 +132,14 @@ app.get('/api/me', function(req, res) {
          json: true
        };
        request.get(options, function(error, response, body) {
+        console.log("In api/me " +token);
          console.log(body);
          res.send(body)
        });
 
 });
 app.get('/api/me/top/artists', function(req, res) {
+  var token = req.session.token;
   var time_range= req.query.time_range;
   var options = {
          url: 'https://api.spotify.com/v1/me/top/artists?time_range='+time_range,
@@ -126,6 +155,7 @@ app.get('/api/me/top/artists', function(req, res) {
 
  });
  app.get('/api/audio-features', function(req, res) {
+  var token = req.session.token;
   var id= req.query.trackId;
   var options = {
          url: 'https://api.spotify.com/v1/audio-features/'+id,
@@ -142,6 +172,7 @@ app.get('/api/me/top/artists', function(req, res) {
  });
 
  app.get('/api/track', function(req, res) {
+  var token = req.session.token;
   var id= req.query.trackId;
   var options = {
          url: 'https://api.spotify.com/v1/tracks/'+id,
